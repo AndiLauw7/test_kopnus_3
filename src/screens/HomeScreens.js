@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 export default function HomeScreen({ navigation }) {
+  const [showBalance, setShowBalance] = useState(false);
   return (
     <ScrollView style={styles.container}>
       <View style={styles.headerBackground}>
@@ -33,13 +34,16 @@ export default function HomeScreen({ navigation }) {
 
         <Text style={styles.balanceTitle}>Your Balance</Text>
         <View style={styles.balanceRow}>
-          <Text style={styles.balance}>Rp 24.321.900</Text>
-          <Ionicons
-            name="eye-outline"
-            size={22}
-            color="#fff"
-            style={styles.eyeIcon}
-          />
+          <Text style={styles.balance}>
+            {showBalance ? "Rp 24.321.900" : "Rp ****"}
+          </Text>
+          <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
+            <Ionicons
+              name={showBalance ? "eye-off" : "eye"}
+              size={24}
+              color="#000"
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.menuWrapper}>
