@@ -17,6 +17,6 @@ export const DataBank = [
   {
     id: 4,
     name: "Bank Mandiri",
-    // logo: require("./assets/mandiri-logo.png"),
+
   },
 ];
