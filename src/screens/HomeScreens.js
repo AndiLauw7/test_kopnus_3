@@ -14,9 +14,19 @@ export default function HomeScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <View style={styles.headerBackground}>
         <View style={styles.header}>
-          <Text style={styles.logo}>CashEase</Text>
+          {/* <Text style={styles.logo}>CashEase</Text> */}
+          <Image
+            source={require("../../assets/case.png")}
+            style={styles.logoImage}
+          />
+
           <View style={styles.pointContainer}>
-            <Ionicons name="star" size={16} color="#FFA500" />
+            {/* <Ionicons name="star" size={16} color="#FFA500" /> */}
+            <Image
+              source={require("../../assets/star.png")}
+              style={styles.customIcon}
+            />
+
             <Text style={styles.pointText}>1.972 Points</Text>
           </View>
         </View>
@@ -147,6 +157,16 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     overflow: "hidden",
+  },
+  logoImage: {
+    width: 120,
+    height: 30,
+    resizeMode: "contain",
+  },
+  customIcon: {
+    width: 16,
+    height: 16,
+    resizeMode: "contain",
   },
   balanceRow: {
     flexDirection: "row",
