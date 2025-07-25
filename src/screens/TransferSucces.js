@@ -33,10 +33,7 @@ export default function TransferSuccess() {
 
         <Text style={styles.sendLabel}>Send to</Text>
         <View style={styles.bankInfo}>
-          <Image
-            // source={require("../assets/bca-logo.png")}
-            style={styles.logo}
-          />
+          {bank?.logo && <Image source={bank.logo} style={styles.logo} />}
           <View>
             <Text style={styles.bankName}>{name}</Text>
             <Text style={styles.account}>•••••• {accountNumber.slice(-5)}</Text>

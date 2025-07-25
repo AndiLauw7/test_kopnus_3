@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  Image,
 } from "react-native";
 import { Ionicons, AntDesign, Entypo } from "@expo/vector-icons";
 import { useEffect } from "react";
@@ -27,7 +28,7 @@ const generateRefNumber = () => {
 };
 
 export default function TransferScreen({ navigation }) {
-  const [bank, setBank] = useState("");
+  const [bank, setBank] = useState(null);
   const [amount, setAmount] = useState("");
   const [amountFormatted, setAmountFormatted] = useState("");
 
@@ -40,7 +41,8 @@ export default function TransferScreen({ navigation }) {
       const selected = route.params.selectedBank;
       const accountNum = route.params.accountNumber;
 
-      setBank(`${selected.name} - ${accountNum}`);
+      // setBank(`${selected.name} - ${accountNum}`);
+      setBank({ ...selected, accountNumber: accountNum });
     }
   }, [route.params]);
   return (
@@ -85,7 +87,7 @@ export default function TransferScreen({ navigation }) {
             ]}
             onPress={() => navigation.navigate("Transfer2BankList")}
           >
-            {bank ? (
+            {/* {bank ? (
               <>
                 <View
                   style={{
@@ -104,6 +106,43 @@ export default function TransferScreen({ navigation }) {
                   </View>
                 </View>
 
+                <Ionicons name="create-outline" size={20} color="#6C00FF" />
+              </>
+            ) : (
+              <>
+                <Text style={styles.dropdownText}>Select bank destination</Text>
+                <Entypo name="chevron-down" size={20} color="#999" />
+              </>
+            )} */}
+            {bank ? (
+              <>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    flex: 1,
+                  }}
+                >
+                  {bank.logo && (
+                    <Image
+                      source={bank.logo}
+                      style={{
+                        width: 32,
+                        height: 32,
+                        resizeMode: "contain",
+                        marginRight: 12,
+                      }}
+                    />
+                  )}
+                  <View>
+                    <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+                      KAROLINA MCMILLAN
+                    </Text>
+                    <Text style={{ color: "#888", fontSize: 13 }}>
+                      •••••• {bank.accountNumber?.slice(-5)}
+                    </Text>
+                  </View>
+                </View>
                 <Ionicons name="create-outline" size={20} color="#6C00FF" />
               </>
             ) : (
@@ -174,7 +213,8 @@ export default function TransferScreen({ navigation }) {
 
               navigation.navigate("TransferSuccess", {
                 name: "Karolina McMillan",
-                bank: bank,
+                // bank: bank,
+                bank: route.params?.selectedBank,
                 accountNumber: route.params?.accountNumber || "80901",
                 amount: amount,
                 fee: fee,

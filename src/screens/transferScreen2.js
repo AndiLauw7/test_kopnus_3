@@ -17,17 +17,17 @@ const bankList = [
   {
     id: "bca",
     name: "Bank Central Asia (BCA)",
-    // logo: require("../assets/bca.png"),
+    logo: require("../../assets/bca-logo.png"),
   },
   {
     id: "bni",
     name: "Bank Negara Indonesia (BNI)",
-    // logo: require("../assets/bni.png"),
+    logo: require("../../assets/bni-logo.png"),
   },
   {
     id: "bri",
     name: "Bank Rakyat Indonesia (BRI)",
-    // logo: require("../assets/bri.png"),
+    logo: require("../../assets/bri-logo.png"),
   },
 ];
 
