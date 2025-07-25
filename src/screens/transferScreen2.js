@@ -29,7 +29,34 @@ const bankList = [
     name: "Bank Rakyat Indonesia (BRI)",
     logo: require("../../assets/bri-logo.png"),
   },
-];
+  {
+    id: "btn",
+    name: "Bank Tabungan Negara (BTN)",
+    logo: require("../../assets/btn-logo.png"),
+  },
+  {
+    id: "mandiri",
+    name: "Bank Mandiri",
+    logo: require("../../assets/mandiri-logo.png"),
+  },
+  {
+    id: "artha",
+    name: "Bank Artha Graha Internasional",
+    logo: require("../../assets/arta-logo.png"),
+  },
+
+  {
+    id: "cimb",
+    name: "CIMB Niaga",
+    logo: require("../../assets/cimb-logo.png"),
+  },
+  {
+    id: "danamon",
+    name: "Bank Danamon",
+    logo: require("../../assets/danamon-logo.png"),
+  },
+]
+;
 
 const Transfer2BankList = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");

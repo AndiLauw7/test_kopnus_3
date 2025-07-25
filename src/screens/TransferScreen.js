@@ -198,7 +198,7 @@ export default function TransferScreen({ navigation }) {
             // onPress={() => alert("Transfer Proceeded!")}
             onPress={() => {
               const numericAmount = parseInt(amount, 10);
-              if (numericAmount <= 10000) {
+              if (numericAmount < 10000) {
                 Toast.show({
                   type: "error",
                   text1: "Transfer Failed",

@@ -12,44 +12,67 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.logo}>CashEase</Text>
-        <View style={styles.pointContainer}>
-          <Ionicons name="star" size={16} color="#FFA500" />
-          <Text style={styles.pointText}>1,972 Points</Text>
+      <View style={styles.headerBackground}>
+        <View style={styles.header}>
+          <Text style={styles.logo}>CashEase</Text>
+          <View style={styles.pointContainer}>
+            <Ionicons name="star" size={16} color="#FFA500" />
+            <Text style={styles.pointText}>1.972 Points</Text>
+          </View>
+        </View>
+
+        <Text style={styles.balanceTitle}>Your Balance</Text>
+        <View style={styles.balanceRow}>
+          <Text style={styles.balance}>Rp 24.321.900</Text>
+          <Ionicons
+            name="eye-outline"
+            size={22}
+            color="#fff"
+            style={styles.eyeIcon}
+          />
+        </View>
+      </View>
+      <View style={styles.menuWrapper}>
+        <View style={styles.menuRow}>
+          {[
+            {
+              label: "Transfer",
+              icon: require("../../assets/transfer.png"),
+            },
+            { label: "Top Up", icon: require("../../assets/toupup.png") },
+            {
+              label: "Withdraw",
+              icon: require("../../assets/wd.png"),
+            },
+            { label: "More", icon: require("../../assets/more.png") },
+          ].map((item, index) => (
+            <TouchableOpacity
+              style={styles.menuItem}
+              key={index}
+              onPress={() => {
+                if (item.label === "Transfer") {
+                  navigation.navigate("Transfer");
+                } else {
+                  alert(`${item.label} sedang maintenance`);
+                }
+              }}
+            >
+              <View style={styles.iconCircle}>
+                <Image source={item.icon} style={styles.iconImage} />
+              </View>
+              <Text style={styles.menuText}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
 
-      <View style={styles.balanceCard}>
-        <Text style={styles.balanceTitle}>Your Balance</Text>
-        <Text style={styles.balance}>Rp 24.321.900</Text>
-      </View>
-
-      <View style={styles.menuRow}>
-        {["Transfer", "Top Up", "Withdraw", "More"].map((item, index) => (
-          <TouchableOpacity
-            style={styles.menuItem}
-            key={index}
-            onPress={() => {
-              if (item === "Transfer") {
-                navigation.navigate("Transfer");
-              } else {
-                alert(`${item} sedang maintenance`);
-              }
-            }}
-          >
-            <MaterialIcons
-              name="account-balance-wallet"
-              size={28}
-              color="#6C00FF"
-            />
-            <Text style={styles.menuText}>{item}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Send Again</Text>
+        <View style={styles.sectionRow}>
+          <Text style={styles.sectionTitle}>Send Again</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAll}>See all</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity style={styles.avatarContainer}>
             <Ionicons name="add-circle-outline" size={40} color="#6C00FF" />
@@ -72,7 +95,13 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Lastest Transaction</Text>
+        <View style={styles.sectionRow}>
+          <Text style={styles.sectionTitle}>Lastest Transaction</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAll}>See all</Text>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.transactionItem}>
           <Ionicons name="swap-horizontal-outline" size={24} color="#6C00FF" />
           <View style={styles.transactionInfo}>
@@ -105,36 +134,128 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "#fff", flex: 1, paddingTop: 40 },
+  container: {
+    backgroundColor: "#fff",
+    flex: 1,
+  },
+
+  headerBackground: {
+    backgroundColor: "#6C00FF",
+    paddingTop: 50,
+    paddingBottom: 60,
+    paddingHorizontal: 20,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    overflow: "hidden",
+  },
+  balanceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 4,
+  },
+  eyeIcon: {
+    marginLeft: 10,
+  },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-  },
-  logo: { fontSize: 22, fontWeight: "bold", color: "#6C00FF" },
-  pointContainer: { flexDirection: "row", alignItems: "center" },
-  pointText: { marginLeft: 5, color: "#333" },
-
-  balanceCard: {
-    backgroundColor: "#6C00FF",
-    margin: 20,
-    padding: 20,
-    borderRadius: 16,
     alignItems: "center",
   },
-  balanceTitle: { color: "#fff", fontSize: 16 },
-  balance: { color: "#fff", fontSize: 28, fontWeight: "bold", marginTop: 10 },
+  logo: { fontSize: 22, fontWeight: "bold", color: "#fff" },
+  pointContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  pointText: {
+    marginLeft: 5,
+    color: "#6C00FF",
+    fontWeight: "600",
+    fontSize: 13,
+  },
+
+  balanceTitle: {
+    color: "#fff",
+    fontSize: 14,
+    marginTop: 20,
+    textAlign: "center",
+  },
+  balance: {
+    color: "#fff",
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 4,
+  },
+
+  menuCard: {
+    backgroundColor: "#fff",
+    marginHorizontal: 0,
+    padding: 16,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    marginTop: -40,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 10,
+  },
+
+  menuWrapper: {
+    backgroundColor: "#fff",
+    marginHorizontal: 20,
+    borderRadius: 20,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
+    marginTop: -40,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 10,
+  },
 
   menuRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginVertical: 20,
   },
-  menuItem: { alignItems: "center" },
-  menuText: { marginTop: 8, color: "#333" },
 
-  section: { marginHorizontal: 20, marginVertical: 10 },
-  sectionTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
+  iconCircle: {
+    width: 35,
+    height: 35,
+    borderRadius: 25,
+    backgroundColor: "#f1edff",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  iconImage: {
+    width: 28,
+    height: 28,
+    resizeMode: "contain",
+  },
+
+  menuItem: { alignItems: "center" },
+  menuText: { marginTop: 8, color: "#333", fontSize: 13, fontWeight: "600" },
+
+  section: {
+    marginHorizontal: 20,
+    marginTop: 30,
+  },
+  sectionRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  sectionTitle: { fontSize: 16, fontWeight: "bold" },
+  seeAll: { color: "#6C00FF", fontSize: 13, fontWeight: "600" },
 
   avatarContainer: { alignItems: "center", marginRight: 16 },
   avatar: { width: 50, height: 50, borderRadius: 25 },
